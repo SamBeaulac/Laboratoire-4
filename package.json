@@ -1,9 +1,17 @@
 {
-  "name": "code",
+  "name": "pizzeria",
   "version": "1.0.0",
   "description": "",
+  "homepage": "https://github.com/SamBeaulac/Laboratoire-4#readme",
+  "bugs": {
+    "url": "https://github.com/SamBeaulac/Laboratoire-4/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SamBeaulac/Laboratoire-4.git"
+  },
   "license": "ISC",
-  "author": "",
+  "author": "SB",
   "type": "commonjs",
   "main": "app.js",
   "scripts": {

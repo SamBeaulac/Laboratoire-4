@@ -1,0 +1,90 @@
+<!--
+ * @file sommaire.ejs
+ * @author Samuel Beaulac
+ * @date 23/09/2025
+ * @Brief Partial pour la section de sommaire de la commande
+-->
+
+<section class="section color-scheme-3">
+  <div class="sommaire-section">
+    <div class="container py-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <h2 class="mb-4">Résumé de la commande</h2>
+          <% if (resume && typeof resume !== 'undefined' && resume !== null) {
+          %>
+          <table class="table table-bordered table-sm bg-white">
+            <tbody>
+              <tr>
+                <th>Pizza</th>
+                <td><%= resume.pizza %></td>
+              </tr>
+              <tr>
+                <th>Taille</th>
+                <td><%= resume.taille %></td>
+              </tr>
+              <tr>
+                <th>Quantité</th>
+                <td><%= resume.quantite %></td>
+              </tr>
+              <tr>
+                <th>Extras</th>
+                <td>
+                  <% if (resume.extras && resume.extras.length > 0) { %> <%
+                  resume.extras.forEach(function(extra) { %>
+                  <span><%= extra %></span>
+                  <% }); %> <% } else { %>
+                  <span class="text-muted">Aucun</span>
+                  <% } %>
+                </td>
+              </tr>
+              <tr>
+                <th>Nom</th>
+                <td><%= resume.prenom %> <%= resume.nom %></td>
+              </tr>
+              <tr>
+                <th>Téléphone</th>
+                <td><%= resume.telephone %></td>
+              </tr>
+              <tr>
+                <th>Adresse</th>
+                <td><%= resume.adresse %></td>
+              </tr>
+              <tr>
+                <th>Code postal</th>
+                <td><%= resume.postal_code %></td>
+              </tr>
+              <tr>
+                <th>Courriel</th>
+                <td><%= resume.email %></td>
+              </tr>
+              <tr>
+                <th>Paiement</th>
+                <td><%= resume.payment %></td>
+              </tr>
+              <tr>
+                <th>Prix avant taxes</th>
+                <td><strong><%= resume.prixAvantTaxes %> $</strong></td>
+              </tr>
+              <tr>
+                <th>Prix après taxes</th>
+                <td><strong><%= resume.prixApresTaxes %> $</strong></td>
+              </tr>
+            </tbody>
+          </table>
+          <% } else { %>
+          <div class="alert alert-warning text-center">
+            <h4 class="alert-heading">🍕 Aucune commande en cours</h4>
+            <p class="mb-3">
+              Vous devez d'abord passer une commande pour voir le résumé.
+            </p>
+            <a href="/order" class="btn btn-primary btn-lg">
+              <i class="fas fa-pizza-slice"></i> Passer une commande
+            </a>
+          </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

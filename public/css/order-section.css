@@ -1,0 +1,42 @@
+/*
+ *  @file order-section.css
+ *  @author Samuel Beaulac
+ *  @date 23/09/25
+ *  @brief Styles pour la section de commande
+*/
+
+.order-section {
+  margin: 0 auto;
+  max-width: 800px;
+  width: 100%;
+}
+
+.form__group {
+  margin-bottom: 3rem;
+}
+
+.form__title {
+  margin-bottom: 1.5rem;
+}
+
+.form__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  row-gap: 1rem;
+  column-gap: 2rem;
+}
+
+.form__col--full {
+  grid-column: 1/-1;
+}
+
+.form__legend,
+.form__label {
+  font-size: 1.25rem;
+}
+
+.form__option--input input,
+.form__option--select select,
+.form__option--textarea textarea {
+  width: 100%;
+}

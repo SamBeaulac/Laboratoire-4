@@ -1,0 +1,262 @@
+<!--
+ * @file order.section.ejs
+ * @author Samuel Beaulac
+ * @date 23/09/2025
+ * @Brief Partial pour la section de commande (formulaire de commande)
+-->
+
+<% const ingredientsArr = [].concat(data['ingredients[]'] || []); %>
+<section class="section color-scheme-3">
+  <div class="order-section">
+    <div class="order__form form color-scheme-1">
+      <div class="form__container p-5">
+        <% if (typeof errors !== 'undefined' && errors.length > 0) { %>
+        <div class="alert alert-danger">
+          Un ou plusieurs champs sont invalides.
+        </div>
+        <% } %>
+        <form action="#" method="POST" id="order-form">
+          <!-- Préférences -->
+          <div class="form__group">
+            <h2 class="form__title h3">Choisissez vos préférences</h2>
+            <div class="form__grid">
+              <!-- Pizza -->
+              <div class="form__col">
+                <fieldset class="form__fieldset">
+                  <legend class="form__legend">Pizza</legend>
+                  <div class="form__options">
+                    <% for (let key in pizzas) { %>
+                    <div class="form__option form__option--radio">
+                      <input
+                        type="radio"
+                        id="pizza-<%= key %>"
+                        name="pizza"
+                        value="<%= key %>"
+                        <%= data.pizza === key ? 'checked' : '' %>
+                      />
+                      <label for="pizza-<%= key %>"><%= pizzas[key].name %></label>
+                    </div>
+                    <% } %>
+                  </div>
+                </fieldset>
+              </div>
+              <!-- Suppléments -->
+              <div class="form__col">
+                <fieldset class="form__fieldset">
+                  <legend class="form__label">Extras</legend>
+                  <div class="form__options">
+                    <div class="form__option form__option--checkbox">
+                        <input
+                        type="checkbox"
+                        id="pepperoni"
+                        name="ingredients[]"
+                        value="pepperoni"
+                        <%= ingredientsArr.includes('pepperoni') ? 'checked' : '' %>
+                      />
+                      <label for="pepperoni">Pepperoni</label>
+                    </div>
+                    <div class="form__option form__option--checkbox">
+                        <input
+                        type="checkbox"
+                        id="champignon"
+                        name="ingredients[]"
+                        value="champignon"
+                        <%= ingredientsArr.includes('champignon') ? 'checked' : '' %>
+                      />
+                      <label for="champignon">Champignon</label>
+                    </div>
+                    <div class="form__option form__option--checkbox">
+                        <input
+                        type="checkbox"
+                        id="olive"
+                        name="ingredients[]"
+                        value="olive"
+                        <%= ingredientsArr.includes('olive') ? 'checked' : '' %>
+                      />
+                      <label for="olive">Olive</label>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+              <!-- Taille -->
+              <div class="form__col">
+                <div class="form__field">
+                  <label class="form__label" for="size">Taille</label>
+                  <div class="form__option form__option--select">
+                    <select id="size" name="size" required>
+                      <option value="Small" <%= data.size === 'Small' ? 'selected' : '' %>>Small</option>
+                      <option value="Medium" <%= data.size === 'Medium' ? 'selected' : '' %>>Medium</option>
+                      <option value="Large" <%= data.size === 'Large' ? 'selected' : '' %>>Large</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <!-- Quantité -->
+              <div class="form__col">
+                <div class="form__field">
+                  <label class="form__label" for="quantite">Quantité</label>
+                  <div class="form__option form__option--input">
+                    <input
+                      type="number"
+                      id="quantite"
+                      name="quantite"
+                      min="1"
+                      max="99"
+                      required
+                      value="<%= typeof data.quantite !== 'undefined' ? data.quantite : 1 %>"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Prénom -->
+          <div class="form__group">
+            <h2 class="form__title h3">Information</h2>
+            <div class="form__grid">
+              <div class="form__col">
+                <div class="form__field">
+                  <label class="form__label" for="prenom">Prénom</label>
+                  <div class="form__option form__option--input">
+                    <input
+                      type="text"
+                      id="prenom"
+                      name="prenom"
+                      placeholder="Bill"
+                      class="form-control"
+                      required
+                      value="<%= data.prenom || '' %>"
+                    />
+                  </div>
+                </div>
+              </div>
+              <!-- Nom -->
+              <div class="form__col">
+                <div class="form__field">
+                  <label class="form__label" for="nom">Nom</label>
+                  <div class="form__option form__option--input">
+                    <input
+                      type="text"
+                      id="nom"
+                      name="nom"
+                      placeholder="Gates"
+                      class="form-control"
+                      required
+                      value="<%= data.nom || '' %>"
+                    />
+                  </div>
+                </div>
+              </div>
+              <!-- Téléphone -->
+              <div class="form__col">
+                <div class="form__field">
+                  <label class="form__label" for="telephone">Téléphone</label>
+                  <div class="form__option form__option--input">
+                    <input
+                      type="tel"
+                      id="telephone"
+                      name="telephone"
+                      pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                      placeholder="555-555-5555"
+                      class="form-control <%= errors && errors.find(e => e.includes('téléphone')) ? 'is-invalid' : '' %>"
+                      value="<%= data.telephone || '' %>"
+                    />
+                  </div>
+                </div>
+              </div>
+              <!-- Courriel -->
+              <div class="form__col">
+                <div class="form__field">
+                  <label class="form__label" for="email">Courriel</label>
+                  <div class="form__option form__option--input">
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      placeholder="billgates@gmail.com"
+                      class="form-control <%= errors && errors.find(e => e.includes('courriel')) ? 'is-invalid' : '' %>"
+                      value="<%= data.email || '' %>"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Livraison -->
+          <!-- Adresse -->
+          <div class="form__group">
+            <h2 class="form__title h3">Livraison</h2>
+            <div class="form__grid">
+              <div class="form__col">
+                <div class="form__field">
+                  <label class="form__label" for="address">Adresse</label>
+                  <div class="form__option form__option--textarea">
+                    <textarea
+                      id="address"
+                      name="address"
+                      rows="3"
+                      cols="50"
+                      class="form-control"
+                      required>
+                      <%= data.address || '' %>
+                    </textarea>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Code postal -->
+              <div class="form__col">
+                <div class="form__field">
+                  <label class="form__label" for="postal_code"
+                    >Code postal</label
+                  >
+                  <div class="form__option form__option--input">
+                    <input
+                      type="text"
+                      id="postal_code"
+                      name="postal_code"
+                      pattern="[A-Z][0-9][A-Z] ?[0-9][A-Z][0-9]"
+                      placeholder="A1A 1A1"
+                      class="form-control <%= errors && errors.find(e => e.includes('code postal')) ? 'is-invalid' : '' %>"
+                      required
+                      value="<%= data.postal_code || '' %>"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mode de paiement -->
+          <div class="form__group">
+            <h2 class="form__title h3">Paiement</h2>
+            <div class="form__grid">
+              <div class="form__col">
+                <div class="from__field">
+                  <label class="form__label" for="payment">Mode</label>
+                  <div class="form__option form__option--input">
+                    <input type="text" id="payment" name="payment" class="form-control" value="<%= data.payment || '' %>" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form__grid">
+              <div class="form__col">
+                <input
+                  class="button button--primary-scheme-1"
+                  type="submit"
+                  value="Confirmer ma commande"
+                />
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

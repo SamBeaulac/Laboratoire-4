@@ -1,14 +1,13 @@
 /*
- *  @file base.css
+ *  @file hero-section.css
  *  @author Samuel Beaulac
- *  @date 21/09/25
- *  @brief
- *  @details
+ *  @date 23/09/25
+ *  @brief Styles pour la section hero
 */
 
 .hero-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }

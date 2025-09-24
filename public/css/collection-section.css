@@ -1,0 +1,51 @@
+/*
+ *  @file collection-sections.css
+ *  @author Samuel Beaulac
+ *  @date 23/09/25
+ *  @brief Styles pour la section de collection (menu des pizzas)
+*/
+
+.collection-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(345px, 1fr));
+  gap: 20px;
+}
+
+.collection-item {
+  border-radius: 12px;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.collection-item__content {
+  padding: 1rem;
+}
+
+.collection-item__content > * + * {
+  margin-top: 1rem;
+}
+
+.collection-item__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.collection-item__actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.collection-item__sizes {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.size-pill {
+  border: 1px solid #036592;
+  padding: 0.25rem 0.5rem;
+}
+
+.size-pill.active {
+  color: white;
+  background-color: #036592;
+}
