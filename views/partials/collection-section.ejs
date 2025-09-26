@@ -1,4 +1,3 @@
-
 <!--
  * @file collection-section.ejs
  * @author Samuel Beaulac
@@ -36,12 +35,8 @@
             <div class="collection-item__meta">
               <div class="collection-item__sizes">
                 <% pizza.sizes.forEach((size, i) => { %>
-                <span class="size-pill text-small"
-                  data-price="<%= Number(pizza.price[i]).toFixed(2) %>"
-                  data-index="<%= i %>"
-                  data-size-value="<%= pizza.sizes[i] %>"
-                  style="cursor:pointer;"
-                >
+                <span class="size-pill text-small" data-price="<%= Number(pizza.price[i]).toFixed(2) %>"
+                  data-index="<%= i %>" data-size-value="<%= pizza.sizes[i] %>" style="cursor:pointer;">
                   <%= size %>
                 </span>
                 <% }) %>
@@ -57,12 +52,12 @@
             </div>
             <!-- actions -->
             <div class="collection-item__actions">
-              <a class="button button--full-width button--primary-scheme-1 order-link" 
+              <a class="button button--full-width button--primary-scheme-1 order-link"
                 href="/order?pizza=<%= key %>&size=<%= pizza.sizes[0] %>">
                 Passer une commande
               </a>
+            </div>
           </div>
-        </div>
       </li>
       <% } %>
     </ul>
@@ -70,38 +65,38 @@
 </section>
 
 <script>
-// Script pour gérer l'affichage dynamique des prix et la sélection de taille sur la page collection
-document.querySelectorAll('.collection-item').forEach(function(item) {
-  // Sélection des éléments HTML nécessaires pour chaque pizza
-  const priceData = item.querySelector('.live-price'); // Élément affichant le prix
-  const sizePills = item.querySelectorAll('.size-pill'); // Boutons de taille
-  const orderLink = item.querySelector('.order-link'); // Lien de commande
+  // Script pour gérer l'affichage dynamique des prix et la sélection de taille sur la page collection
+  document.querySelectorAll('.collection-item').forEach(function (item) {
+    // Sélection des éléments HTML nécessaires pour chaque pizza
+    const priceData = item.querySelector('.live-price'); // Élément affichant le prix
+    const sizePills = item.querySelectorAll('.size-pill'); // Boutons de taille
+    const orderLink = item.querySelector('.order-link'); // Lien de commande
 
-  // Taille sélectionnée par défaut (première taille)
-  let selectedSize = sizePills[0]?.getAttribute('data-size-value');
+    // Taille sélectionnée par défaut (première taille)
+    let selectedSize = sizePills[0] ? .getAttribute('data-size-value');
 
-  // Ajout d'un écouteur sur chaque bouton de taille
-  sizePills.forEach(function(pill) {
-    pill.addEventListener('click', function() {
-      // 1. Retirer la classe active de tous les boutons
-      sizePills.forEach(p => p.classList.remove('active'));
-      // 2. Ajouter la classe active sur le bouton cliqué
-      pill.classList.add('active');
+    // Ajout d'un écouteur sur chaque bouton de taille
+    sizePills.forEach(function (pill) {
+      pill.addEventListener('click', function () {
+        // 1. Retirer la classe active de tous les boutons
+        sizePills.forEach(p => p.classList.remove('active'));
+        // 2. Ajouter la classe active sur le bouton cliqué
+        pill.classList.add('active');
 
-      // 3. Mettre à jour le prix affiché avec 2 décimales
-      const price = pill.getAttribute('data-price');
-      const priceFixed = Number(price).toFixed(2);
-      priceData.textContent = priceFixed + '$';
-      priceData.setAttribute('value', priceFixed);
+        // 3. Mettre à jour le prix affiché avec 2 décimales
+        const price = pill.getAttribute('data-price');
+        const priceFixed = Number(price).toFixed(2);
+        priceData.textContent = priceFixed + '$';
+        priceData.setAttribute('value', priceFixed);
 
-      // 4. Mettre à jour la taille sélectionnée
-      selectedSize = pill.getAttribute('data-size-value');
+        // 4. Mettre à jour la taille sélectionnée
+        selectedSize = pill.getAttribute('data-size-value');
 
-      // 5. Mettre à jour dynamiquement le lien de commande avec la bonne taille
-      const url = new URL(orderLink.href, window.location.origin);
-      url.searchParams.set('size', selectedSize);
-      orderLink.href = url.pathname + url.search;
+        // 5. Mettre à jour dynamiquement le lien de commande avec la bonne taille
+        const url = new URL(orderLink.href, window.location.origin);
+        url.searchParams.set('size', selectedSize);
+        orderLink.href = url.pathname + url.search;
+      });
     });
   });
-});
 </script>
